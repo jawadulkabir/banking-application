@@ -1,19 +1,12 @@
-package main.java;
+package main.java.Account;
 
 import java.util.Date;
 
 public abstract class Account {
-    private String accountNo;
-    private String accountName;
-    private Double balance;
-    private Date creationDate;
-
-    public Account(String accountNo, String accountName, Double balance, Date creationDate) {
-        this.accountNo = accountNo;
-        this.accountName = accountName;
-        this.balance = balance;
-        this.creationDate = creationDate;
-    }
+    protected String accountNo;
+    protected String accountName;
+    protected double balance;
+    protected Date creationDate;
 
     public String getAccountNo() {
         return accountNo;
@@ -31,11 +24,11 @@ public abstract class Account {
         this.accountName = accountName;
     }
 
-    public Double getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
@@ -46,4 +39,8 @@ public abstract class Account {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
+
+    abstract public void updateAccount();
+    abstract public void depositAmount();
+    abstract public void withdrawAmount();
 }
