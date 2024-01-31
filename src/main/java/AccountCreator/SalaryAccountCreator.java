@@ -8,7 +8,7 @@ import java.util.Date;
 public class SalaryAccountCreator implements AccountCreator {
     private double  minOpeningBalance;
 
-    public SalaryAccountCreator(double minOpeningBalance, double minBalanceAfterWithdrawal) {
+    public SalaryAccountCreator(double minOpeningBalance) {
         this.minOpeningBalance = minOpeningBalance;
     }
 
