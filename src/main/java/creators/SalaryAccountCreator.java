@@ -1,7 +1,7 @@
-package main.java.AccountCreator;
+package main.java.creators;
 
-import main.java.Account.Account;
-import main.java.Account.SalaryAccount;
+import main.java.accounts.Account;
+import main.java.accounts.SalaryAccount;
 
 import java.util.Date;
 

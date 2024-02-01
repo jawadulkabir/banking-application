@@ -1,12 +1,11 @@
 package main.java;
 
-import main.java.Account.Account;
-import main.java.AccountCreator.AccountCreator;
-import main.java.AccountCreator.CurrentAccountCreator;
-import main.java.AccountCreator.SalaryAccountCreator;
-import main.java.AccountCreator.SavingsAccountCreator;
+import main.java.accounts.Account;
+import main.java.creators.AccountCreator;
+import main.java.creators.CurrentAccountCreator;
+import main.java.creators.SalaryAccountCreator;
+import main.java.creators.SavingsAccountCreator;
 
-import java.util.Date;
 import java.util.Scanner;
 
 public class BankingApplication {
@@ -27,6 +26,7 @@ public class BankingApplication {
             System.out.println("7. Search for an account");
             System.out.println("8. Exit");
 
+            Account targetAccount;
             choice = scanner.nextInt();
             scanner.nextLine();
 
@@ -39,22 +39,14 @@ public class BankingApplication {
                     String accType = scanner.nextLine();
 
                     AccountCreator creator;
-                    if(accType.equals("C"))
-                    {
-                        creator = new CurrentAccountCreator(1000);
-                    }
-                    else if(accType.equals("Sv"))
-                    {
-                        creator = new SavingsAccountCreator(2000);
-                    }
-                    else if(accType.equals("Sl"))
-                    {
-                        creator = new SalaryAccountCreator(200);
-                    }
-                    else
-                    {
-                        System.out.println("Invalid Choice");
-                        continue;
+                    switch (accType) {
+                        case "C" -> creator = new CurrentAccountCreator(1000);
+                        case "Sv" -> creator = new SavingsAccountCreator(2000);
+                        case "Sl" -> creator = new SalaryAccountCreator(200);
+                        default -> {
+                            System.out.println("Invalid Choice");
+                            continue;
+                        }
                     }
 
                     System.out.println("Enter account name:");
@@ -63,6 +55,96 @@ public class BankingApplication {
                     double openingBalance = scanner.nextDouble();
 
                     bank.addAccount(creator, accName, openingBalance);
+                    break;
+
+                case 2:
+                    System.out.println("All accounts:");
+                    bank.displayAllAccounts();
+                    break;
+
+                case 3:
+                    System.out.println("Enter the Account No to update:");
+                    String accNo = scanner.nextLine();
+                    targetAccount = bank.searchAccount(accNo);
+
+                    if(targetAccount != null)
+                    {
+                        System.out.println("Account Name: " + targetAccount.getAccountName() + ". Enter new name: ");
+                        String newName = scanner.nextLine();
+                        targetAccount.updateAccount(newName);
+                    }
+                    else
+                    {
+                        System.out.println("Account does not exist");
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Enter the account no to delete:");
+                    String toDeleteAccNo = scanner.nextLine();
+
+                    targetAccount = bank.searchAccount(toDeleteAccNo);
+                    if(targetAccount != null)
+                    {
+                        targetAccount.delete();
+                    }
+                    else
+                    {
+                        System.out.println("Account does not exist");
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Enter the account no to deposit:");
+                    String toDepositAccNo = scanner.nextLine();
+
+                    targetAccount = bank.searchAccount(toDepositAccNo);
+                    if(targetAccount != null)
+                    {
+                        System.out.println("Enter amount to deposit: ");
+                        String amount = scanner.nextLine();
+                        targetAccount.depositAmount(Double.valueOf(amount));
+                    }
+                    else
+                    {
+                        System.out.println("Account does not exist");
+                    }
+                    break;
+
+                case 6:
+                    System.out.println("Enter the account no to withdraw:");
+                    String toWithdrawAccNo = scanner.nextLine();
+
+                    targetAccount = bank.searchAccount(toWithdrawAccNo);
+                    if(targetAccount != null)
+                    {
+                        System.out.println("Enter amount to withdraw: ");
+                        String amount = scanner.nextLine();
+                        targetAccount.withdrawAmount(Double.valueOf(amount));
+                    }
+                    else
+                    {
+                        System.out.println("Account does not exist");
+                    }
+                    break;
+
+                case 7:
+                    System.out.println("Enter the account no search:");
+                    String toSearchAccNo = scanner.nextLine();
+
+                    targetAccount = bank.searchAccount(toSearchAccNo);
+                    if(targetAccount != null)
+                    {
+                        targetAccount.displayAccount();
+                    }
+                    else
+                    {
+                        System.out.println("Account does not exist");
+                    }
+                    break;
+
+                case 8:
+                    System.out.println("Exiting the application.");
                     break;
 
                 default:

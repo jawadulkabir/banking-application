@@ -1,14 +1,14 @@
-package main.java.AccountCreator;
+package main.java.creators;
 
-import main.java.Account.Account;
-import main.java.Account.SavingsAccount;
+import main.java.accounts.Account;
+import main.java.accounts.CurrentAccount;
 
 import java.util.Date;
 
-public class SavingsAccountCreator implements AccountCreator{
-    private double  minOpeningBalance;
+public class CurrentAccountCreator implements AccountCreator {
+    private final double  minOpeningBalance;
 
-    public SavingsAccountCreator(double minOpeningBalance) {
+    public CurrentAccountCreator(double minOpeningBalance) {
         this.minOpeningBalance = minOpeningBalance;
     }
 
@@ -19,6 +19,6 @@ public class SavingsAccountCreator implements AccountCreator{
             System.out.println("Minimum " + this.minOpeningBalance + " required to open account.");
             return null;
         }
-        return new SavingsAccount(accountNo, accountName, openingBalance, creationDate);
+        return new CurrentAccount(accountNo, accountName, openingBalance, creationDate);
     }
 }

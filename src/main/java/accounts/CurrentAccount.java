@@ -1,4 +1,4 @@
-package main.java.Account;
+package main.java.accounts;
 
 import java.util.Date;
 
@@ -13,8 +13,15 @@ public class CurrentAccount extends Account {
 
     public void displayAccount()
     {
-        super.displayAccount();
-        System.out.println("Account Type: Current Account");
+        if(!isDeleted)
+        {
+            super.displayAccount();
+            System.out.println("Account Type: Current Account");
+        }
+        else
+        {
+            System.out.println("Account does not exist");
+        }
     }
 
     @Override

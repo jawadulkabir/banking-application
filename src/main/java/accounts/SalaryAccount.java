@@ -1,4 +1,4 @@
-package main.java.Account;
+package main.java.accounts;
 
 import java.util.Date;
 
@@ -14,8 +14,15 @@ public class SalaryAccount extends Account {
 
     public void displayAccount()
     {
-        super.displayAccount();
-        System.out.println("Account Type: Salary Account");
+        if(!isDeleted)
+        {
+            super.displayAccount();
+            System.out.println("Account Type: Salary Account");
+        }
+        else
+        {
+            System.out.println("Account does not exist");
+        }
     }
 
     @Override

@@ -1,12 +1,8 @@
 package main.java;
 
-import main.java.Account.Account;
-import main.java.AccountCreator.AccountCreator;
-import main.java.AccountCreator.CurrentAccountCreator;
-import main.java.AccountCreator.SalaryAccountCreator;
-import main.java.AccountCreator.SavingsAccountCreator;
+import main.java.accounts.Account;
+import main.java.creators.AccountCreator;
 
-import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -33,8 +29,11 @@ public class Bank {
         try {
             int accountNo = getNextAccountNo();
             Account account = creator.createAccount(Integer.toString(accountNo), accountName, openingBalance, new Date());
-            accounts.add(account);
-            System.out.println("Account created successfully");
+            if(account != null)
+            {
+                accounts.add(account);
+                System.out.println("Account created successfully");
+            }
         }
         catch (Exception ex)
         {
@@ -50,7 +49,7 @@ public class Bank {
     public Account searchAccount(String targetAccountNo)
     {
         for (Account account : accounts) {
-            if (account.getAccountNo() == targetAccountNo) {
+            if (account.getAccountNo().equals(targetAccountNo)) {
                 return account; // Found the account
             }
         }
@@ -60,7 +59,8 @@ public class Bank {
     public void displayAllAccounts()
     {
         for (Account account : accounts) {
-            account.displayAccount();
+            if(!account.isDeleted())
+                account.displayAccount();
         }
     }
 

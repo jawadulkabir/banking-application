@@ -1,4 +1,4 @@
-package main.java.Account;
+package main.java.accounts;
 
 import java.util.Date;
 
@@ -45,9 +45,17 @@ public abstract class Account {
         this.creationDate = creationDate;
     }
 
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
     public void displayAccount()
     {
-        System.out.println("Account Details:");
+        System.out.println("\nAccount Details:");
         System.out.println("Account Number: " + accountNo);
         System.out.println("Account Name: " + accountName);
         System.out.println("Balance: $" + balance);
@@ -60,7 +68,7 @@ public abstract class Account {
             System.out.println("Account does not exist");
         else
         {
-            this.accountName = newName;
+            setAccountName(newName);
             System.out.println("Updated");
         }
     }
