@@ -33,16 +33,16 @@ public class BankingApplication {
             switch (choice) {
                 case 1:
                     System.out.println("Choose Account Type:");
-                    System.out.println("Type 'C' to Create a new Current Account");
-                    System.out.println("Type 'Sv' Create a new Saving Account");
-                    System.out.println("Type 'Sl' Create a new Salary Account");
+                    System.out.println("Type 'cur' to Create a new Current Account");
+                    System.out.println("Type 'sav' Create a new Savings Account");
+                    System.out.println("Type 'sal' Create a new Salary Account");
                     String accType = scanner.nextLine();
 
                     AccountCreator creator;
                     switch (accType) {
-                        case "C" -> creator = new CurrentAccountCreator(1000);
-                        case "Sv" -> creator = new SavingsAccountCreator(2000);
-                        case "Sl" -> creator = new SalaryAccountCreator(200);
+                        case "cur" -> creator = new CurrentAccountCreator();
+                        case "sav" -> creator = new SavingsAccountCreator();
+                        case "sal" -> creator = new SalaryAccountCreator();
                         default -> {
                             System.out.println("Invalid Choice");
                             continue;
@@ -52,9 +52,16 @@ public class BankingApplication {
                     System.out.println("Enter account name:");
                     String accName = scanner.nextLine();
                     System.out.println("Enter opening balance:");
-                    double openingBalance = scanner.nextDouble();
+                    String openingBalance = scanner.nextLine();
 
-                    bank.addAccount(creator, accName, openingBalance);
+                    try{
+                        bank.addAccount(creator, accName, Double.parseDouble(openingBalance));
+                    }
+                    catch (Exception ex)
+                    {
+                        System.err.println("Provide a valid opening balance");
+                    }
+
                     break;
 
                 case 2:
@@ -103,7 +110,13 @@ public class BankingApplication {
                     {
                         System.out.println("Enter amount to deposit: ");
                         String amount = scanner.nextLine();
-                        targetAccount.depositAmount(Double.valueOf(amount));
+                        try{
+                            targetAccount.depositAmount(Double.parseDouble(amount));
+                        }
+                        catch (Exception ex)
+                        {
+                            System.err.println("Provide a valid amount");
+                        }
                     }
                     else
                     {
@@ -120,7 +133,13 @@ public class BankingApplication {
                     {
                         System.out.println("Enter amount to withdraw: ");
                         String amount = scanner.nextLine();
-                        targetAccount.withdrawAmount(Double.valueOf(amount));
+                        try{
+                            targetAccount.withdrawAmount(Double.parseDouble(amount));
+                        }
+                        catch (Exception ex)
+                        {
+                            System.err.println("Provide a valid amount");
+                        }
                     }
                     else
                     {

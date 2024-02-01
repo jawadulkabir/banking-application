@@ -1,9 +1,10 @@
 package main.java.accounts;
 
+import main.java.AccountType;
+
 import java.util.Date;
 
 public class CurrentAccount extends Account {
-    private final double  minBalanceAfterWithdrawal = 500;
     public CurrentAccount(String accountNo, String accountName, double balance, Date creationDate) {
         this.accountNo = accountNo;
         this.accountName = accountName;
@@ -50,7 +51,7 @@ public class CurrentAccount extends Account {
             System.out.println("Account does not exist");
         else
         {
-            if(balance - amt < minBalanceAfterWithdrawal)
+            if(balance - amt < AccountType.CURRENT.getMinBalanceAfterWithdrawal())
             {
                 System.out.println("You cannot withdraw this amount");
             }
